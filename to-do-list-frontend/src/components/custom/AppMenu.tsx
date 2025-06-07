@@ -13,6 +13,7 @@ import {
     SidebarHeader,
     SidebarFooter,
 } from "@/components/ui/sidebar"
+import { NewTaskForm } from "./NewTaskForm";
 
 export default function AppMenu() {
     return (
@@ -47,10 +48,7 @@ export default function AppMenu() {
                 </SidebarGroup>
             </SidebarContent>
             <SidebarFooter className="mb-5">
-                <Button size={"lg"} className="w-full bg-blue-500 hover:bg-blue-600"  >
-                    <data.sidebar.button.icon className="w-5 h-5" />
-                    <span>{data.sidebar.button.label}</span>
-                </Button>
+                <NewTaskForm />
             </SidebarFooter>
         </Sidebar>
     );

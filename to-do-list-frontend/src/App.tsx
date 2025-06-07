@@ -1,8 +1,7 @@
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import './App.css'
 import { data } from './lib/data'
-import Layout from './layout'
 import { Checkbox } from './components/ui/checkbox'
 import { Label } from './components/ui/label'
 
@@ -10,11 +9,11 @@ import { Label } from './components/ui/label'
 function App() {
   const path = data.sidebar.items.filter((item: any) => item.path === location.pathname)[0].label;
 
-  return <Layout>
-    <div className='flex flex-col items-start max-h-screen space-y-4 py-2 px-0 w-full'>
+  return (
+    <div className='flex flex-col items-start max-h-screen space-y-4 py-2 px-0'>
       <h1 className='text-3xl font-semibold mb-6'>{path}</h1>
       <div className='flex -mx-2'>
-        {data.badges.map((badge: any, index: number) => (
+        {data.categories.map((badge: any, index: number) => (
           <div className='mx-2' key={index}>
             <Button variant="outline" size="lg"  >
               <badge.icon className='inline' />
@@ -41,7 +40,7 @@ function App() {
         </Card>
       ))}
     </div>
-  </Layout>
+  )
 }
 
 export default App

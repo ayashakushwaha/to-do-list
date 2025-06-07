@@ -4,16 +4,15 @@ export const data = {
     "title": "To-Do List",
     "description": "A simple to-do list application to manage your tasks.",
     "sidebar": {
-        title: "My Tasks",
+        title: "My To-Do",
         items: [
             { label: "Today", icon: Sun, path: "/today" }, // Changed icon to Calendar
             { label: "Upcoming", icon: Calendar1, path: "/upcoming" },
             { label: "Completed", icon: CheckCircle, path: "/completed" },
             { label: "Settings", icon: Settings, path: "/settings" }
         ],
-        button:{label: "New Task", icon: Plus, path: "/new-task" }
     },
-    "badges": [
+    "categories": [
         {
             "label": "Work",
             "variant": "default",
