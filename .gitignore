@@ -6,7 +6,7 @@ logs
 *yarn-error.log*
 *pnpm-debug.log*
 *lerna-debug.log*
-
+to-do-backend-learn
 *node_modules
 *dist
 *dist-ssr
@@ -22,3 +22,6 @@ logs
 *.njsproj
 *.sln
 *.sw?
+
+venv
+*__pycache__*

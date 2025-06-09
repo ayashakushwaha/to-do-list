@@ -1,24 +1,29 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import App from './App.tsx'
+import ToDoApp, { loader as taskListLoader } from './ToDoApp.tsx'
 import { createBrowserRouter, Navigate } from 'react-router-dom'
 import { RouterProvider } from 'react-router-dom'
-import { NewTaskForm } from './components/custom/NewTaskForm.tsx'
-import Layout from './layout.tsx'
+import RootLayout from './RootLayout.tsx'
+import TaskForm, { loader as taskLoader } from './components/custom/TaskForm.tsx'
 
 const router = createBrowserRouter([
   {
-    path: '/', element: <Layout />, children: [
+    path: '/',
+    element: <RootLayout />,
+    children: [
       { path: "/", element: <Navigate to="/today" /> },
-      { path: '/today', element: <App />, },
-      { path: '/upcoming', element: <App /> },
-      { path: '/completed', element: <App /> },
-      { path: '/settings', element: <App /> },
-      { path: "/new-task", element: <NewTaskForm /> }
+      {
+        path: ":section",
+        element: <ToDoApp />,
+        loader: taskListLoader,
+        children: [
+          { path: "tasks/new", element: <TaskForm /> },
+          { path: "tasks/:id", element: <TaskForm />, loader: taskLoader }
+        ]
+      }
     ]
-  },
-
+  }
 ])
 
 createRoot(document.getElementById('root')!).render(

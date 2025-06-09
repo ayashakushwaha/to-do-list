@@ -1,5 +1,5 @@
-import { data } from "@/lib/data";
-import { NavLink } from "react-router-dom";
+import { menu } from "@/lib/data";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import {
     Sidebar,
@@ -8,38 +8,39 @@ import {
     SidebarGroupContent,
     SidebarGroupLabel,
     SidebarMenu,
-    SidebarMenuButton,
     SidebarMenuItem,
-    SidebarHeader,
     SidebarFooter,
-} from "@/components/ui/sidebar"
-import { NewTaskForm } from "./NewTaskForm";
+} from "@/components/ui/sidebar";
+import { Plus } from "lucide-react";
 
 export default function AppMenu() {
+    const navigate = useNavigate();
+    const addNewTaskPath = `/${location.pathname.split("/")[1]}/tasks/new`;
+
     return (
-        <Sidebar variant="inset" className="pt-7 pl-7 pr-2 ">
+        <Sidebar variant="inset" className="pt-7 pl-7 pr-2">
             <SidebarContent>
                 <SidebarGroup>
                     <SidebarGroupLabel>
-                        <h1 className="text-lg mb-4 text-black">
-                            {data.sidebar.title}
-                        </h1>
+                        <h1 className="text-lg mb-4 text-black">{menu.sidebar.title}</h1>
                     </SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu className="space-y-1">
-                            {data.sidebar.items.map((item, index) => (
+                            {menu.sidebar.items.map(({ path, icon: Icon, label }, index) => (
                                 <SidebarMenuItem key={index}>
                                     <NavLink
-                                        to={item.path}
-                                        key={index}
+                                        to={path}
                                         className={({ isActive, isPending }) =>
-                                            `flex w-full text-md items-center space-x-4 p-3 rounded-md ` +
-                                            (isActive ? 'bg-[#e7edf4] ' : 'hover:bg-gray-100') +
-                                            (isPending ? 'pending:bg-gray-200 ' : '')
+                                            `flex w-full text-md items-center space-x-4 p-3 rounded-md ${isActive ? "bg-[#e7edf4]" : "hover:bg-gray-100"
+                                            } ${isPending ? "pending:bg-gray-200" : ""} ${isActive && label === "Overdue" ? "text-red-500" :
+                                                isActive && label === "Upcoming" ? "text-amber-500" :
+                                                    isActive && label === "Completed" ? "text-green-600" :
+                                                        isActive && label === "Today" ? "text-blue-600" : ""
+                                            }`
                                         }
                                     >
-                                        <item.icon className="w-5 h-5" />
-                                        <span>{item.label}</span>
+                                        <Icon className="w-5 h-5" />
+                                        <span>{label}</span>
                                     </NavLink>
                                 </SidebarMenuItem>
                             ))}
@@ -48,7 +49,14 @@ export default function AppMenu() {
                 </SidebarGroup>
             </SidebarContent>
             <SidebarFooter className="mb-5">
-                <NewTaskForm />
+                <Button
+                    size="lg"
+                    className="bg-blue-500 hover:bg-blue-600 w-full"
+                    onClick={() => navigate(addNewTaskPath)}
+                >
+                    <Plus className="w-5 h-5" />
+                    <span>New Task</span>
+                </Button>
             </SidebarFooter>
         </Sidebar>
     );

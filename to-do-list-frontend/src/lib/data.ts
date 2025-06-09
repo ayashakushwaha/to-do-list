@@ -1,22 +1,22 @@
-import { Calendar1, CheckCircle, GraduationCap, Home, Laptop, Plus, Settings, Sun, User} from "lucide-react";
+import { Calendar1, CheckCircle, ClockAlert, GraduationCap, Home, Laptop, Plus, Settings, Sun, User} from "lucide-react";
 
-export const data = {
+export const menu = {
     "title": "To-Do List",
     "description": "A simple to-do list application to manage your tasks.",
     "sidebar": {
         title: "My To-Do",
         items: [
-            { label: "Today", icon: Sun, path: "/today" }, // Changed icon to Calendar
+            { label: "Today", icon: Sun, path: "/today" },
+            { label: "Overdue", icon: ClockAlert, path: "/overdue" },
             { label: "Upcoming", icon: Calendar1, path: "/upcoming" },
             { label: "Completed", icon: CheckCircle, path: "/completed" },
-            { label: "Settings", icon: Settings, path: "/settings" }
         ],
     },
     "categories": [
         {
             "label": "Work",
             "variant": "default",
-            "icon": Laptop // Consider importing Briefcase from lucide-react
+            "icon": Laptop 
         },
         {
             "label": "Personal",
@@ -33,10 +33,5 @@ export const data = {
             "variant": "success",
             "icon": GraduationCap
         },
-    ],
-    "tasks":[
-        {title: "Schedule a doctor's appointment", description: "", completed: false},
-        {title: "Prepare presentation for the client meeting", description: "Description for task 2", completed: true},
-        {title: "Buy groceries for the week", description: "Description for task 3", completed: false}
     ],
 }

@@ -7,3 +7,4 @@ class Task(SQLModel, table=True):
     description: str | None = Field(default=None)
     due_date: date = Field(default=date.today())
     category: str | None = Field(default=None)
+    completed: bool = Field(default=False)
