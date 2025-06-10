@@ -20,12 +20,12 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "../ui/textarea"
 import { addTask, deleteTaskById, getTaskById, updateTask, type Task, type TaskData } from "@/lib/actions";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 
 export default function TaskForm() {
     const task = useLoaderData();
     const navigate = useNavigate();
-
+    const params = useParams()
     const [newTask, setNewTask] = useState<TaskData>({
         title: task?.title || "",
         description: task?.description || "",
@@ -33,10 +33,8 @@ export default function TaskForm() {
         category: task?.category || "",
         completed: false
     });
-
     const handleClose = () => {
-        // Go back to previous page or route
-        navigate(-1);
+        navigate(`/${params.section}?refresh=${Date.now()}`, { replace: true });
     };
 
     const handleSave = async (e: React.FormEvent<HTMLFormElement>) => {

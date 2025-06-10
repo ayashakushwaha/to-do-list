@@ -15,7 +15,7 @@ const router = createBrowserRouter([
       { path: "/", element: <Navigate to="/today" /> },
       {
         path: ":section",
-        element: <ToDoApp />,
+        element: <ToDoApp key={location.pathname} />,
         loader: taskListLoader,
         children: [
           { path: "tasks/new", element: <TaskForm /> },

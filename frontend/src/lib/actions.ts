@@ -52,7 +52,6 @@ export const getTasks = async (filter?: string): Promise<Task[]> => {
 
         const url = params.toString() ? `${API_URL}?${params.toString()}` : API_URL;
         const response = await fetch(url);
-        console.log(filter,"ok")
         return await handleResponse(response);
     } catch (error) {
         console.error("Error fetching tasks:", error);

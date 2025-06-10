@@ -1,5 +1,5 @@
 import { menu } from "@/lib/data";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { Button } from "../ui/button";
 import {
     Sidebar,
@@ -15,11 +15,13 @@ import { Plus } from "lucide-react";
 
 export default function AppMenu() {
     const navigate = useNavigate();
-    const addNewTaskPath = `/${location.pathname.split("/")[1]}/tasks/new`;
+    const params = useParams()
+    const addNewTaskPath = `/${params.section}/tasks/new`;
 
     return (
-        <Sidebar variant="inset" className="pt-7 pl-7 pr-2">
-            <SidebarContent>
+        <Sidebar variant="inset" className="pt-7 pl-7 pr-2 flex flex-col">
+
+            <SidebarContent className="flex flex-col lg:justify-between">
                 <SidebarGroup>
                     <SidebarGroupLabel>
                         <h1 className="text-lg mb-4 text-black">{menu.sidebar.title}</h1>
@@ -47,17 +49,17 @@ export default function AppMenu() {
                         </SidebarMenu>
                     </SidebarGroupContent>
                 </SidebarGroup>
+                <SidebarFooter className="mb-5 ">
+                    <Button
+                        size="lg"
+                        className="bg-blue-500 hover:bg-blue-600 w-full"
+                        onClick={() => navigate(addNewTaskPath)}
+                    >
+                        <Plus className="w-5 h-5" />
+                        <span>New Task</span>
+                    </Button>
+                </SidebarFooter>
             </SidebarContent>
-            <SidebarFooter className="mb-5">
-                <Button
-                    size="lg"
-                    className="bg-blue-500 hover:bg-blue-600 w-full"
-                    onClick={() => navigate(addNewTaskPath)}
-                >
-                    <Plus className="w-5 h-5" />
-                    <span>New Task</span>
-                </Button>
-            </SidebarFooter>
         </Sidebar>
     );
 }

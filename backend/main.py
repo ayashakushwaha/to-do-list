@@ -16,7 +16,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PATCH", "OPTIONS"],
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 
@@ -46,13 +46,13 @@ def read_tasks(
     query = select(Task)
     if(before_date):
         before_date_obj = datetime.strptime(before_date,"%Y-%m-%d").date()
-        query = query.where(Task.due_date >= before_date_obj)
+        query = query.where(Task.due_date < before_date_obj)
     if(due_date):
         due_date_obj = datetime.strptime(due_date,"%Y-%m-%d").date()
         query = query.where(Task.due_date == due_date_obj)
     if(after_date):
         after_date_obj = datetime.strptime(after_date,"%Y-%m-%d").date()
-        query = query.where(Task.due_date < after_date_obj)
+        query = query.where(Task.due_date > after_date_obj)
     if completed is not None:
         query = query.where(Task.completed == completed)
     tasks = session.exec(query).all()

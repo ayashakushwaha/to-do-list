@@ -10,7 +10,7 @@ function ToDoApp() {
   // Extract the current section label from the sidebar menu based on route path
   const currentSectionLabel = menu.sidebar.items.find((item: any) => item.path === location.pathname)?.label;
 
-  // Load tasks from router data
+  // Load tasks using loader function
   const allTasks = useLoaderData();
   const [filteredTasks, setFilteredTasks] = useState(allTasks);
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -26,12 +26,11 @@ function ToDoApp() {
             <Toggle
               variant="outline"
               size="lg"
-              className='select:bg-blue-500'
+              className='data-[state=on]:bg-slate-200'
               pressed={selectedCategory === categoryItem.label}
               onPressedChange={(isPressed) => {
                 const newCategory = isPressed ? categoryItem.label : "";
                 setSelectedCategory(newCategory);
-                console.log("Clicked:", categoryItem.label, "New Category:", newCategory);
                 setFilteredTasks(
                   isPressed
                     ? allTasks.filter((task: Task) => task.category === categoryItem.label)
@@ -39,7 +38,7 @@ function ToDoApp() {
                 );
               }}
             >
-              <categoryItem.icon className='inline' />
+              <categoryItem.icon className=' hidden md:inline' />
               {categoryItem.label}
             </Toggle>
           </div>
@@ -49,7 +48,7 @@ function ToDoApp() {
       {allTasks.length > 0 && !selectedCategory ? (
         allTasks.map((task: Task) => <TaskCard task={task} key={task.id} />)
       ) : (
-        selectedCategory ? filteredTasks.map((task: Task) => <TaskCard task={task} key={task.id} />) :
+        selectedCategory && filteredTasks > 0 ? filteredTasks.map((task: Task) => <TaskCard task={task} key={task.id} />) :
           <p className='m-auto p-20 text-gray-600'>No Tasks Found! 📝✒️</p>
       )}
     </div>
