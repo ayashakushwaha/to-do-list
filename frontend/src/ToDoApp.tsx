@@ -48,7 +48,7 @@ function ToDoApp() {
       {allTasks.length > 0 && !selectedCategory ? (
         allTasks.map((task: Task) => <TaskCard task={task} key={task.id} />)
       ) : (
-        selectedCategory && filteredTasks > 0 ? filteredTasks.map((task: Task) => <TaskCard task={task} key={task.id} />) :
+        selectedCategory ? filteredTasks.map((task: Task) => <TaskCard task={task} key={task.id} />) :
           <p className='m-auto p-20 text-gray-600'>No Tasks Found! 📝✒️</p>
       )}
     </div>
