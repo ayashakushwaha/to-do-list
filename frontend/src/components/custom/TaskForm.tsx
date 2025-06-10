@@ -95,7 +95,7 @@ export default function TaskForm() {
                                 <Label htmlFor="category" className="text-gray-800">
                                     Category
                                 </Label>
-                                <Select onValueChange={(value) => setNewTask({ ...newTask, category: value })}>
+                                <Select value={newTask.category} onValueChange={(value) => setNewTask({ ...newTask, category: value })}>
                                     <SelectTrigger className="w-full bg-neutral-50" >
                                         <SelectValue placeholder="e.g. Work, Personal" />
                                     </SelectTrigger>
