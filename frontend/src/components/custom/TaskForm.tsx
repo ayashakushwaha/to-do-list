@@ -62,7 +62,7 @@ export default function TaskForm() {
         <Dialog open={true} onOpenChange={(open) => { if (!open) handleClose(); }}>
             <DialogContent className="sm:max-w-[425px]" tabIndex={-1}>
                 <DialogHeader>
-                    <DialogTitle>Add to To-do List</DialogTitle>
+                    <DialogTitle>{task ? "Edit" : "Add to"} To-do List</DialogTitle>
                 </DialogHeader>
                 <form onSubmit={handleSave}>
                     <div className="flex flex-col gap-4">
